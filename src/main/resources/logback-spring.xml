@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ==================================================================== -->
+<!-- Sample SocketAppender configuration. -->
+<!-- ==================================================================== -->
+
+<configuration>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>[%date][%-5level] - [%F:%L] - %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<springProperty scope="context" name="host" source="log.socket.host" defaultValue="localhost"/>
+	<springProperty scope="context" name="port" source="log.socket.port" defaultValue="6000"/>
+	<springProperty scope="context" name="includeCallerData" source="log.socket.includeCallerData" defaultValue="true"/>
+<!-- 	<appender name="SOCKET"
+		class="ch.qos.logback.classic.net.SocketAppender">
+		<RemoteHost>${host}</RemoteHost>
+		<Port>${port}</Port>
+		<ReconnectionDelay>10000</ReconnectionDelay>
+		<IncludeCallerData>${includeCallerData}</IncludeCallerData>
+	</appender> -->
+
+	<logger name="com.chart" level="debug" additivity="false">
+		<!-- <appender-ref ref="SOCKET" /> -->
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="info">
+		<!-- <appender-ref ref="SOCKET" /> -->	
+		<appender-ref ref="STDOUT" />
+	</root>
+	
+</configuration>
